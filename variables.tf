@@ -9,10 +9,3 @@ variable "index_document" {
   description = "Index page to be used for website. Defaults to index.html"
   default     = "index.html"
 }
-
-variable "secret_user_agent" {
-  type        = string
-  description = "secret to authenticate CF requests to s3"
-  default     = "SECRET-STRING"
-}
-
