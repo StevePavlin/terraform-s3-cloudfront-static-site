@@ -42,12 +42,6 @@ data "aws_iam_policy_document" "bucket_policy" {
       "arn:aws:s3:::${local.bucket_name}/*",
     ]
 
-    condition {
-      test = ""
-      values = []
-      variable = ""
-    }
-
     principals {
       type        = "*"
       identifiers = ["*"]
