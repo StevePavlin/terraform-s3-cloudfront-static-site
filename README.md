@@ -36,7 +36,14 @@ module "static-s3-cloudfront-frontend" {
 
 This module assumes you're not using Route53 to manage DNS so setup is manual.
 
-When the DNS verification step is created, you can view ACM to get the DNS verification details, then point your DNS towards the specified endpoint.
+When the DNS verification step is created, you can view ACM to get the DNS verification details, then point your DNS towards the specified endpoint to finish provisioning the SSL certificate.
+
+
+## Deploying
+
+After a deploy to the S3 bucket through a CI pipeline, you will likely want to invalidate index.html (plus other static assets if you're not using code splitting with unique hashes).
+
+ex. ```aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths /index.html```
 
 ## License 
 MIT
