@@ -1,4 +1,9 @@
-# Usage
+# Static frontend
+
+A terraform module to deploy a static frontend into s3 + cloudfront. Provisions an HTTPS certificate in us-east-1 (virginia) to be used with CloudFront.
+
+
+## Usage
 
 ```
 // The region to provision S3 in
@@ -28,3 +33,10 @@ module "static-s3-cloudfront-frontend" {
   }
 }
 ```
+
+This module assumes you're not using Route53 to manage DNS so setup is manual.
+
+When the DNS verification step is created, you can view ACM to get the DNS verification details, then point your DNS towards the specified endpoint.
+
+## License 
+MIT

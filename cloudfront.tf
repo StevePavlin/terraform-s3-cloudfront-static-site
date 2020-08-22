@@ -38,6 +38,7 @@ resource "aws_cloudfront_distribution" "main" {
     }
   }
 
+  // cache index.html/assets for 1 hour, we invalidate index.html during deployment
   default_cache_behavior {
     target_origin_id = "origin-${local.bucket_name}"
     allowed_methods  = ["GET", "HEAD"]
@@ -53,32 +54,9 @@ resource "aws_cloudfront_distribution" "main" {
     }
 
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 300
-    max_ttl                = 1200
-  }
-
-  # dont cache the service worker
-  ordered_cache_behavior {
-    target_origin_id = "origin-${local.bucket_name}"
-    path_pattern     = "sw.js"
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-
-    forwarded_values {
-      query_string = false
-      headers      = ["Origin"]
-
-      cookies {
-        forward = "none"
-      }
-    }
-
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
-    compress               = true
-    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 3600
+    default_ttl            = 3600
+    max_ttl                = 3600
   }
 
   viewer_certificate {

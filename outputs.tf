@@ -9,7 +9,12 @@ output "iam_access_key_secret" {
   description = "IAM secret access key for S3 CI user"
 }
 
-output "bucket_name" {
-  value = "${aws_s3_bucket.main.id}"
-  description = "S3 bucket name"
+output "cloudfront_domain_name" {
+  value = "${aws_cloudfront_distribution.main.domain_name}"
+  description = "The cloudfront domain name to point your cname records towards"
+}
+
+output "cloudfront_distribution_id" {
+  value = "${aws_cloudfront_distribution.main.id}"
+  description = "The cloudfront distribution id"
 }
